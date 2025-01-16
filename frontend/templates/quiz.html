@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2>Available Quizzes</h2>
+    <div class="quiz-grid">
+        {% if quizzes %}
+            {% for quiz in quizzes %}
+            <div class="quiz-card">
+                <h3>Quiz #{{ quiz._id }}</h3>
+                <p class="question">{{ quiz.question }}</p>
+                <div class="quiz-preview">
+                    <p><strong>Options:</strong></p>
+                    <ul>
+                        <li>A: {{ quiz.option_a }}</li>
+                        <li>B: {{ quiz.option_b }}</li>
+                        <li>C: {{ quiz.option_c }}</li>
+                        <li>D: {{ quiz.option_d }}</li>
+                    </ul>
+                </div>
+                <a href="{{ url_for('take_quiz', quiz_id=quiz._id) }}" class="button primary">Take Quiz</a>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p>No quizzes available at the moment.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

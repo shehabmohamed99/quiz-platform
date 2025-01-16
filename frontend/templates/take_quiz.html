@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="quiz-container">
+        {% if quiz %}
+            <div class="question-card">
+                <h2>Question #{{ quiz._id }}</h2>
+                <p class="question">{{ quiz.question }}</p>
+                <form method="POST">
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" id="option_a" name="answer" value="A" required>
+                            <label for="option_a">A: {{ quiz.option_a }}</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="option_b" name="answer" value="B" required>
+                            <label for="option_b">B: {{ quiz.option_b }}</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="option_c" name="answer" value="C" required>
+                            <label for="option_c">C: {{ quiz.option_c }}</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="option_d" name="answer" value="D" required>
+                            <label for="option_d">D: {{ quiz.option_d }}</label>
+                        </div>
+                    </div>
+                    <button type="submit" class="button primary">Submit Answer</button>
+                </form>
+            </div>
+        {% else %}
+            <p>Quiz not found.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
