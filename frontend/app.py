@@ -12,6 +12,7 @@ db_quizzes = os.getenv('DB_QUIZZES')
 host = os.getenv("APP_HOST", "127.0.0.1")  
 port = int(os.getenv("APP_PORT", 5000))
 
+
 app.secret_key = os.urandom(24)
 
 # MongoDB connection with your specific configuration
