@@ -9,8 +9,8 @@ db_host = os.getenv('DB_HOST')
 db_client = os.getenv('DB_CLIENT')
 db_users = os.getenv('DB_USERS')
 db_quizzes = os.getenv('DB_QUIZZES')
-host = os.getenv("APP_HOST", "127.0.0.1")  
-port = int(os.getenv("APP_PORT", 5000))
+#host = os.getenv("APP_HOST", "127.0.0.1")  
+#port = int(os.getenv("APP_PORT", 5000))
 
 
 app.secret_key = os.urandom(24)
@@ -121,4 +121,5 @@ def leaderboard():
     return render_template('leaderboard.html', leaders=leaders)
 
 if __name__ == '__main__':
-    app.run(host='host', port='port')
+    #app.run(host='host', port='port')
+     app.run(debug=True)
