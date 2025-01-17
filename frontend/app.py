@@ -9,8 +9,8 @@ db_host = os.getenv('DB_HOST')
 db_client = os.getenv('DB_CLIENT')
 db_users = os.getenv('DB_USERS')
 db_quizzes = os.getenv('DB_QUIZZES')
-host = os.getenv('APP_HOST')  
-port = os.getenv('APP_PORT')
+host = os.getenv('APP_HOST', '0.0.0.0')  
+port = os.getenv('APP_PORT', '8080')
 
 
 app.secret_key = os.urandom(24)
