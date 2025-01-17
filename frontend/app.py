@@ -6,6 +6,7 @@ import os
 app = Flask(__name__)
 
 db_host = os.getenv('DB_HOST')
+db_port = os.getenv('DB_PORT')
 db_client = os.getenv('DB_CLIENT')
 db_users = os.getenv('DB_USERS')
 db_quizzes = os.getenv('DB_QUIZZES')
@@ -16,7 +17,7 @@ port = os.getenv('APP_PORT')
 app.secret_key = os.urandom(24)
 
 # MongoDB connection with your specific configuration
-client = MongoClient('mongodb://{db_host}:27017/')
+client = MongoClient('mongodb://{db_host}:{db_port}/')
 db = client['{db_client}']  # Updated database name
 users = db['{db_users}']  # Collection reference
 quizzes = db['{db_quizzes}']  # Collection reference
