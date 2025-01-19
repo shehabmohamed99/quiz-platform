@@ -17,7 +17,7 @@ port = os.getenv('APP_PORT')
 app.secret_key = os.urandom(24)
 
 # MongoDB connection with your specific configuration
-client = MongoClient('mongodb://mongodb:27017/')
+client = MongoClient('mongodb://{db_host}:{db_port}/')
 db = client['{db_client}']  # Updated database name
 users = db['{db_users}']  # Collection reference
 quizzes = db['{db_quizzes}']  # Collection reference
