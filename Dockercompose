@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: shehab999/quiz-platform-app:v0.1-db # Use the official MongoDB image
+    container_name: mongodb
+    ports:
+      - "27017:27017"  # Expose MongoDB's default port
+    volumes:
+      - /var/lib/docker/volumes/datavolume2:/data/db  # Use the existing named volume
+    networks:
+      - app_network
+
+  app:
+    image: shehab999/quiz-platform-app:v0.1-app  # Use the official Python image (or your custom app image)
+    container_name: app
+    #working_dir: /app
+    volumes:
+      - /var/lib/docker/volumes/datavolume2:/app  # Mount your local app directory for development
+    #command: python app.py  # Command to run your Python application
+    environment:
+      - DB_HOST=mongodb
+      - DB_PORT=27017
+    depends_on:
+      - mongodb  # Ensure MongoDB starts before the app
+    networks:
+      - app_network
+
+volumes:
+  datavolume:  # Reference your existing Docker volume (no need to redefine)
+
+networks:
+  app_network:  # Custom network for both containers
