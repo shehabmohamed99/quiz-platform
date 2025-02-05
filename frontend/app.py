@@ -15,12 +15,18 @@ port = os.getenv('APP_PORT')
 
 
 app.secret_key = os.urandom(24)
+mongo_uri = f"mongodb://{db_host}:{db_port}/"
+client = MongoClient(mongo_uri)
 
+# Reference database and collections
+db = client[db_client]
+users = db[db_users]
+quizzes = db[db_quizzes]
 # MongoDB connection with your specific configuration
-client = MongoClient('mongodb://{db_host}:{db_port}/')
-db = client['{db_client}']  # Updated database name
-users = db['{db_users}']  # Collection reference
-quizzes = db['{db_quizzes}']  # Collection reference
+#client = MongoClient('mongodb://{db_host}:{db_port}/')
+#db = client['{db_client}']  # Updated database name
+#users = db['{db_users}']  # Collection reference
+#quizzes = db['{db_quizzes}']  # Collection reference
 
 @app.route('/')
 def index():
@@ -122,5 +128,5 @@ def leaderboard():
     return render_template('leaderboard.html', leaders=leaders)
 
 if __name__ == '__main__':
-    app.run(host=host, port=port)
+    app.run(host=host, port=int(port))
      #app.run(debug=True)
