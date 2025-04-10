@@ -1,33 +1,29 @@
 version: '3.8'
 
 services:
-  mongodb:
-    image: shehab999/quiz-platform-app:v0.1-db # Use the official MongoDB image
-    container_name: mongodb
+  mongo:
+    image: quiz-platform-app:v0.2-db
+    container_name: quiz-mongo
     ports:
-      - "27017:27017"  # Expose MongoDB's default port
+      - "27017:27017"
     volumes:
-      - /var/lib/docker/volumes/datavolume2:/data/db  # Use the existing named volume
-    networks:
-      - app_network
-
-  app:
-    image: shehab999/quiz-platform-app:v0.1-app  # Use the official Python image (or your custom app image)
-    container_name: app
-    #working_dir: /app
-    volumes:
-      - /var/lib/docker/volumes/datavolume2:/app  # Mount your local app directory for development
-    #command: python app.py  # Command to run your Python application
+      - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
     environment:
-      - DB_HOST=mongodb
-      - DB_PORT=27017
+      MONGO_INITDB_DATABASE: ${DB_CLIENT}
+
+  web:
+    image: shehab999/quiz-platform-app:v0.2-app         
+    container_name: quiz-app
+    ports:
+      - "${APP_PORT}:${APP_PORT}"
+    environment:
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_CLIENT: ${DB_CLIENT}
+      DB_USERS: ${DB_USERS}
+      DB_QUIZZES: ${DB_QUIZZES}
+      APP_HOST: ${APP_HOST}
+      APP_PORT: ${APP_PORT}
     depends_on:
-      - mongodb  # Ensure MongoDB starts before the app
-    networks:
-      - app_network
-
-volumes:
-  datavolume:  # Reference your existing Docker volume (no need to redefine)
-
-networks:
-  app_network:  # Custom network for both containers
+      - mongo
+    restart: on-failure
