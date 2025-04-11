@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   mongodb:
-    image: shehab999/quiz-platform-app:v0.1-db 
+    image: shehab999/quiz-platform-app:v0.2-db 
     container_name: mongodb
     ports:
       - "27017:27017"  
@@ -12,7 +12,7 @@ services:
       - app_network
 
   app:
-    image: shehab999/quiz-platform-app:v0.1-app  
+    image: shehab999/quiz-platform-app:v0.2-app  
     container_name: app
     #working_dir: /app
     volumes:
