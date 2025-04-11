@@ -2,31 +2,30 @@ version: '3.8'
 
 services:
   mongodb:
-    image: shehab999/quiz-platform-app:v0.2-db 
+    image: shehab999/quiz-platform-app:v0.2-db
     container_name: mongodb
     ports:
-      - "27017:27017"  
-    volumes:
-      - /var/lib/docker/volumes/datavolume2:/data/db  
+      - "27017:27017"
     networks:
       - app_network
+    volumes:
+      - /var/lib/docker/volumes/datavolume2:/data/db
 
   app:
-    image: shehab999/quiz-platform-app:v0.2-app  
+    image: shehab999/quiz-platform-app:v0.2-app
     container_name: app
-    ports:
-      - "8000:8000"
-    #working_dir: /app
-    #volumes:
-    #- /var/lib/docker/volumes/datavolume2:/app  
-    #command: python app.py 
     environment:
       - DB_HOST=mongodb
       - DB_PORT=27017
-      - DB_NAME=quizdb
-
+      - DB_NAME=quizdb          
+      - DB_USERS=users          
+      - DB_QUIZZES=quizzes      
+      - APP_HOST=0.0.0.0        
+      - APP_PORT=8000           
+    ports:
+      - "8000:8000"             
     depends_on:
-      - mongodb  
+      - mongodb
     networks:
       - app_network
 
@@ -34,4 +33,4 @@ volumes:
   datavolume: 
 
 networks:
-  app_network:  
+  app_network:
