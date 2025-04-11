@@ -5,4 +5,4 @@ COPY . .
 RUN pip install -r requirements.txt
 #RUN docker volume create data_volume
 ENTRYPOINT ["python", "app.py"]
-EXPOSE 8080
+EXPOSE 8000
