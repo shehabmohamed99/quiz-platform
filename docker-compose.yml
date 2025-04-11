@@ -3,7 +3,7 @@ version: '3.8'
 services:
   mongo:
     build:
-      context: ./mongo
+      context: ./db
     image: quiz-platform-db
     container_name: quiz-mongo
     ports:
