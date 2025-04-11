@@ -15,7 +15,7 @@ services:
 
   web:
     build:
-      context: ./app
+      context: ./frontend
     image: quiz-platform-app
     container_name: quiz-app
     ports:
