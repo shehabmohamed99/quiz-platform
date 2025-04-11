@@ -1,10 +1,10 @@
 version: '3.8'
 
 services:
-  web:
+  mongo:
     build:
-      context: .
-    image: quiz-platform-app
+      context: ./mongo
+    image: quiz-platform-db
     container_name: quiz-mongo
     ports:
       - "27017:27017"
@@ -14,7 +14,9 @@ services:
       MONGO_INITDB_DATABASE: ${DB_CLIENT}
 
   web:
-    image: shehab999/quiz-platform-app:v0.2-app         
+    build:
+      context: ./app
+    image: quiz-platform-app
     container_name: quiz-app
     ports:
       - "${APP_PORT}:${APP_PORT}"
