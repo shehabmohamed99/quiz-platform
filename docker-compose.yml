@@ -17,8 +17,8 @@ services:
     ports:
       - "8000:8000"
     #working_dir: /app
-    volumes:
-      - /var/lib/docker/volumes/datavolume2:/app  
+    #volumes:
+    #- /var/lib/docker/volumes/datavolume2:/app  
     #command: python app.py 
     environment:
       - DB_HOST=mongodb
