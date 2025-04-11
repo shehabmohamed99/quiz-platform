@@ -23,6 +23,8 @@ services:
       - DB_PORT=27017
     depends_on:
       - mongodb  
+     ports:
+      - "8000:8000"
     networks:
       - app_network
 
