@@ -17,10 +17,10 @@ services:
     environment:
       - DB_HOST=mongodb
       - DB_PORT=27017
-      - DB_NAME="quiz_platform_app"
-      - DB_CLIENT="quiz_platform_app"
-      - DB_USERS="users"          
-      - DB_QUIZZES="quizzes"      
+      - DB_NAME=quiz_platform_app
+      - DB_CLIENT=quiz_platform_app
+      - DB_USERS=users          
+      - DB_QUIZZES=quizzes      
       - APP_HOST=0.0.0.0        
       - APP_PORT=8000           
     ports:
